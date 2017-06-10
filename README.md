@@ -1,9 +1,9 @@
 ##  Metro Tile Customizer ##
-![License](https://img.shields.io/badge/license-MIT License-red.svg)
+![License](https://img.shields.io/badge/license-MIT-red.svg)
 ![Release](https://img.shields.io/badge/version-v1.0.0-blue.svg)
 ![Build](https://img.shields.io/badge/build-Stable-brightgreen.svg)
-![Compatibility](https://img.shields.io/badge/compatibility-Windows 8/8.1/10-blue.svg)
-![Framework](https://img.shields.io/badge/framework version-4.5.2-lightgrey.svg)
+![Compatibility](https://img.shields.io/badge/compatibility-Windows_8/8.1/10-blue.svg)
+![Framework](https://img.shields.io/badge/framework_version-4.5.2-lightgrey.svg)
 
 A tool for customizing metro tile colors in Windows 8, 8.1, and 10.
 
