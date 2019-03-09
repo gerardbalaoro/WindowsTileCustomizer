@@ -6,7 +6,7 @@
 
 A tool for customizing metro tile colors in Windows 8, 8.1, and 10.
 
-![Screenshot](https://snag.gy/WfY1NS.jpg)
+![Screenshot](https://snag.gy/rFySRt.jpg)
 
 ## How it Works
 
