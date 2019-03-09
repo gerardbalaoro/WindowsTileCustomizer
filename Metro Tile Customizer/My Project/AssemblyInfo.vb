@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Metro Tile Customizer")>
+<Assembly: AssemblyTitle("MetroTileCustomizer")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("Gerard Balaoro")>
 <Assembly: AssemblyProduct("Metro Tile Customizer")>
-<Assembly: AssemblyCopyright("Copyright ©  2016")>
+<Assembly: AssemblyCopyright("Copyright ©  2019")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.1.0.0")>
 <Assembly: AssemblyFileVersion("1.0.0.0")>

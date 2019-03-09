@@ -26,6 +26,8 @@ Partial Class MainForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.Tab_Main = New MetroFramework.Controls.MetroTabControl()
         Me.TabPage_Main = New MetroFramework.Controls.MetroTabPage()
+        Me.Restore = New MetroFramework.Controls.MetroButton()
+        Me.Colorize = New MetroFramework.Controls.MetroButton()
         Me.HexColor = New MetroFramework.Controls.MetroTextBox()
         Me.LinkPath = New System.Windows.Forms.TextBox()
         Me.TilePreview = New MetroFramework.Controls.MetroTile()
@@ -35,23 +37,19 @@ Partial Class MainForm
         Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
         Me.opt_Text_Light = New MetroFramework.Controls.MetroRadioButton()
         Me.opt_Text_Dark = New MetroFramework.Controls.MetroRadioButton()
-        Me.Button2_Restore = New MetroFramework.Controls.MetroTextBox.MetroTextButton()
-        Me.Button1_Colorize = New MetroFramework.Controls.MetroTextBox.MetroTextButton()
         Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
         Me.Switch_NameOnTile = New MetroFramework.Controls.MetroToggle()
         Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.ComboBox = New MetroFramework.Controls.MetroComboBox()
-        Me.HiddenComboBox = New MetroFramework.Controls.MetroComboBox()
         Me.TabPage_About = New MetroFramework.Controls.MetroTabPage()
-        Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
+        Me.Credits = New MetroFramework.Controls.MetroLabel()
         Me.Logo = New System.Windows.Forms.PictureBox()
-        Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
+        Me.DeveloperLink = New MetroFramework.Controls.MetroLabel()
+        Me.DeveloperName = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
+        Me.Description = New MetroFramework.Controls.MetroLabel()
         Me.TabPage_License = New MetroFramework.Controls.MetroTabPage()
         Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
         Me.Tab_Colors = New MetroFramework.Controls.MetroTabControl()
@@ -61,6 +59,7 @@ Partial Class MainForm
         Me.OtherColorPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.TabPage_Accent = New MetroFramework.Controls.MetroTabPage()
         Me.AccentPanel = New System.Windows.Forms.FlowLayoutPanel()
+        Me.AddColor = New System.Windows.Forms.PictureBox()
         Me.ThemeManager = New MetroFramework.Components.MetroStyleManager(Me.components)
         Me.ColorDialog = New System.Windows.Forms.ColorDialog()
         Me.Tab_Main.SuspendLayout()
@@ -73,6 +72,8 @@ Partial Class MainForm
         Me.TabPage_Color.SuspendLayout()
         Me.TabPage_ColorOther.SuspendLayout()
         Me.TabPage_Accent.SuspendLayout()
+        Me.AccentPanel.SuspendLayout()
+        CType(Me.AddColor, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ThemeManager, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -86,26 +87,26 @@ Partial Class MainForm
         Me.Tab_Main.Name = "Tab_Main"
         Me.Tab_Main.SelectedIndex = 1
         Me.Tab_Main.Size = New System.Drawing.Size(411, 342)
+        Me.Tab_Main.Style = MetroFramework.MetroColorStyle.Green
         Me.Tab_Main.TabIndex = 3
         Me.Tab_Main.UseSelectable = True
         '
         'TabPage_Main
         '
+        Me.TabPage_Main.Controls.Add(Me.Restore)
+        Me.TabPage_Main.Controls.Add(Me.Colorize)
         Me.TabPage_Main.Controls.Add(Me.HexColor)
         Me.TabPage_Main.Controls.Add(Me.LinkPath)
         Me.TabPage_Main.Controls.Add(Me.TilePreview)
         Me.TabPage_Main.Controls.Add(Me.MetroLabel5)
         Me.TabPage_Main.Controls.Add(Me.opt_Text_Light)
         Me.TabPage_Main.Controls.Add(Me.opt_Text_Dark)
-        Me.TabPage_Main.Controls.Add(Me.Button2_Restore)
-        Me.TabPage_Main.Controls.Add(Me.Button1_Colorize)
         Me.TabPage_Main.Controls.Add(Me.MetroLabel4)
         Me.TabPage_Main.Controls.Add(Me.MetroLabel3)
         Me.TabPage_Main.Controls.Add(Me.Switch_NameOnTile)
         Me.TabPage_Main.Controls.Add(Me.MetroLabel2)
         Me.TabPage_Main.Controls.Add(Me.MetroLabel1)
         Me.TabPage_Main.Controls.Add(Me.ComboBox)
-        Me.TabPage_Main.Controls.Add(Me.HiddenComboBox)
         Me.TabPage_Main.HorizontalScrollbarBarColor = True
         Me.TabPage_Main.HorizontalScrollbarHighlightOnWheel = False
         Me.TabPage_Main.HorizontalScrollbarSize = 10
@@ -118,6 +119,30 @@ Partial Class MainForm
         Me.TabPage_Main.VerticalScrollbarHighlightOnWheel = False
         Me.TabPage_Main.VerticalScrollbarSize = 10
         '
+        'Restore
+        '
+        Me.Restore.Location = New System.Drawing.Point(3, 254)
+        Me.Restore.Name = "Restore"
+        Me.Restore.Size = New System.Drawing.Size(189, 37)
+        Me.Restore.TabIndex = 23
+        Me.Restore.Text = "Restore Defaults"
+        Me.Restore.UseSelectable = True
+        '
+        'Colorize
+        '
+        Me.Colorize.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.Colorize.ForeColor = System.Drawing.Color.White
+        Me.Colorize.Highlight = True
+        Me.Colorize.Location = New System.Drawing.Point(211, 254)
+        Me.Colorize.Name = "Colorize"
+        Me.Colorize.Size = New System.Drawing.Size(189, 37)
+        Me.Colorize.Style = MetroFramework.MetroColorStyle.Green
+        Me.Colorize.TabIndex = 22
+        Me.Colorize.Text = "Apply"
+        Me.Colorize.UseCustomBackColor = True
+        Me.Colorize.UseCustomForeColor = True
+        Me.Colorize.UseSelectable = True
+        '
         'HexColor
         '
         Me.HexColor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
@@ -125,7 +150,7 @@ Partial Class MainForm
         '
         '
         Me.HexColor.CustomButton.Image = Nothing
-        Me.HexColor.CustomButton.Location = New System.Drawing.Point(-20, 2)
+        Me.HexColor.CustomButton.Location = New System.Drawing.Point(50, 2)
         Me.HexColor.CustomButton.Name = ""
         Me.HexColor.CustomButton.Size = New System.Drawing.Size(17, 17)
         Me.HexColor.CustomButton.Style = MetroFramework.MetroColorStyle.Green
@@ -143,6 +168,7 @@ Partial Class MainForm
         Me.HexColor.SelectedText = ""
         Me.HexColor.SelectionLength = 0
         Me.HexColor.SelectionStart = 0
+        Me.HexColor.ShortcutsEnabled = True
         Me.HexColor.Size = New System.Drawing.Size(70, 22)
         Me.HexColor.TabIndex = 2
         Me.HexColor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -184,12 +210,11 @@ Partial Class MainForm
         '
         'TileMenu
         '
-        Me.TileMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        Me.TileMenu.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer))
+        Me.TileMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.TileMenu.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.TileMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenFileLocationToolStripMenuItem, Me.OpenTargetFileToolStripMenuItem})
         Me.TileMenu.Name = "TileMenu"
         Me.TileMenu.Size = New System.Drawing.Size(184, 48)
-        Me.TileMenu.Theme = MetroFramework.MetroThemeStyle.Dark
         Me.TileMenu.UseStyleColors = True
         '
         'OpenFileLocationToolStripMenuItem
@@ -235,34 +260,6 @@ Partial Class MainForm
         Me.opt_Text_Dark.TabIndex = 12
         Me.opt_Text_Dark.Text = "Dark"
         Me.opt_Text_Dark.UseSelectable = True
-        '
-        'Button2_Restore
-        '
-        Me.Button2_Restore.Image = Nothing
-        Me.Button2_Restore.Location = New System.Drawing.Point(3, 254)
-        Me.Button2_Restore.Name = "Button2_Restore"
-        Me.Button2_Restore.Size = New System.Drawing.Size(189, 37)
-        Me.Button2_Restore.Style = MetroFramework.MetroColorStyle.Green
-        Me.Button2_Restore.TabIndex = 11
-        Me.Button2_Restore.Text = "Restore Defaults"
-        Me.Button2_Restore.UseCustomBackColor = True
-        Me.Button2_Restore.UseSelectable = True
-        Me.Button2_Restore.UseStyleColors = True
-        Me.Button2_Restore.UseVisualStyleBackColor = True
-        '
-        'Button1_Colorize
-        '
-        Me.Button1_Colorize.Image = Nothing
-        Me.Button1_Colorize.Location = New System.Drawing.Point(211, 254)
-        Me.Button1_Colorize.Name = "Button1_Colorize"
-        Me.Button1_Colorize.Size = New System.Drawing.Size(189, 37)
-        Me.Button1_Colorize.Style = MetroFramework.MetroColorStyle.Green
-        Me.Button1_Colorize.TabIndex = 10
-        Me.Button1_Colorize.Text = "Apply"
-        Me.Button1_Colorize.UseCustomBackColor = True
-        Me.Button1_Colorize.UseSelectable = True
-        Me.Button1_Colorize.UseStyleColors = True
-        Me.Button1_Colorize.UseVisualStyleBackColor = True
         '
         'MetroLabel4
         '
@@ -312,40 +309,26 @@ Partial Class MainForm
         '
         'ComboBox
         '
+        Me.ComboBox.DisplayMember = "name"
         Me.ComboBox.DropDownHeight = 200
-        Me.ComboBox.FontSize = MetroFramework.MetroComboBoxSize.Small
         Me.ComboBox.FormattingEnabled = True
         Me.ComboBox.IntegralHeight = False
-        Me.ComboBox.ItemHeight = 19
-        Me.ComboBox.Location = New System.Drawing.Point(3, 36)
+        Me.ComboBox.ItemHeight = 23
+        Me.ComboBox.Location = New System.Drawing.Point(4, 36)
         Me.ComboBox.Name = "ComboBox"
-        Me.ComboBox.Size = New System.Drawing.Size(397, 25)
+        Me.ComboBox.Size = New System.Drawing.Size(397, 29)
         Me.ComboBox.TabIndex = 2
         Me.ComboBox.UseSelectable = True
-        '
-        'HiddenComboBox
-        '
-        Me.HiddenComboBox.DropDownHeight = 200
-        Me.HiddenComboBox.FontSize = MetroFramework.MetroComboBoxSize.Small
-        Me.HiddenComboBox.FormattingEnabled = True
-        Me.HiddenComboBox.IntegralHeight = False
-        Me.HiddenComboBox.ItemHeight = 19
-        Me.HiddenComboBox.Location = New System.Drawing.Point(3, 36)
-        Me.HiddenComboBox.Name = "HiddenComboBox"
-        Me.HiddenComboBox.Size = New System.Drawing.Size(397, 25)
-        Me.HiddenComboBox.TabIndex = 19
-        Me.HiddenComboBox.UseSelectable = True
-        Me.HiddenComboBox.Visible = False
+        Me.ComboBox.ValueMember = "path"
         '
         'TabPage_About
         '
-        Me.TabPage_About.Controls.Add(Me.MetroLabel12)
+        Me.TabPage_About.Controls.Add(Me.Credits)
         Me.TabPage_About.Controls.Add(Me.Logo)
-        Me.TabPage_About.Controls.Add(Me.MetroLabel11)
-        Me.TabPage_About.Controls.Add(Me.MetroLabel10)
-        Me.TabPage_About.Controls.Add(Me.MetroLabel9)
+        Me.TabPage_About.Controls.Add(Me.DeveloperLink)
+        Me.TabPage_About.Controls.Add(Me.DeveloperName)
         Me.TabPage_About.Controls.Add(Me.MetroLabel8)
-        Me.TabPage_About.Controls.Add(Me.MetroLabel6)
+        Me.TabPage_About.Controls.Add(Me.Description)
         Me.TabPage_About.HorizontalScrollbarBarColor = True
         Me.TabPage_About.HorizontalScrollbarHighlightOnWheel = False
         Me.TabPage_About.HorizontalScrollbarSize = 10
@@ -358,61 +341,50 @@ Partial Class MainForm
         Me.TabPage_About.VerticalScrollbarHighlightOnWheel = False
         Me.TabPage_About.VerticalScrollbarSize = 10
         '
-        'MetroLabel12
+        'Credits
         '
-        Me.MetroLabel12.AutoSize = True
-        Me.MetroLabel12.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.MetroLabel12.Location = New System.Drawing.Point(3, 192)
-        Me.MetroLabel12.Name = "MetroLabel12"
-        Me.MetroLabel12.Size = New System.Drawing.Size(175, 30)
-        Me.MetroLabel12.TabIndex = 8
-        Me.MetroLabel12.Text = "Credits:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Dennis Magno's MetroFramework"
-        Me.MetroLabel12.WrapToLine = True
+        Me.Credits.AutoSize = True
+        Me.Credits.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.Credits.Location = New System.Drawing.Point(3, 192)
+        Me.Credits.Name = "Credits"
+        Me.Credits.Size = New System.Drawing.Size(175, 30)
+        Me.Credits.TabIndex = 8
+        Me.Credits.Text = "Credits:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Dennis Magno's MetroFramework"
+        Me.Credits.WrapToLine = True
         '
         'Logo
         '
         Me.Logo.BackColor = System.Drawing.Color.Transparent
         Me.Logo.Image = CType(resources.GetObject("Logo.Image"), System.Drawing.Image)
-        Me.Logo.Location = New System.Drawing.Point(206, 92)
+        Me.Logo.Location = New System.Drawing.Point(205, 92)
         Me.Logo.Name = "Logo"
-        Me.Logo.Size = New System.Drawing.Size(167, 170)
+        Me.Logo.Size = New System.Drawing.Size(168, 170)
         Me.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Logo.TabIndex = 7
         Me.Logo.TabStop = False
         '
-        'MetroLabel11
+        'DeveloperLink
         '
-        Me.MetroLabel11.AutoSize = True
-        Me.MetroLabel11.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.MetroLabel11.Location = New System.Drawing.Point(3, 259)
-        Me.MetroLabel11.Name = "MetroLabel11"
-        Me.MetroLabel11.Size = New System.Drawing.Size(197, 15)
-        Me.MetroLabel11.TabIndex = 6
-        Me.MetroLabel11.Text = "Copyright (c) 2016. All Rights Reserved"
-        Me.MetroLabel11.WrapToLine = True
+        Me.DeveloperLink.AutoSize = True
+        Me.DeveloperLink.FontSize = MetroFramework.MetroLabelSize.Small
+        Me.DeveloperLink.Location = New System.Drawing.Point(3, 152)
+        Me.DeveloperLink.Name = "DeveloperLink"
+        Me.DeveloperLink.Size = New System.Drawing.Size(142, 15)
+        Me.DeveloperLink.TabIndex = 5
+        Me.DeveloperLink.Text = "github.com/GerardBalaoro"
+        Me.DeveloperLink.WrapToLine = True
         '
-        'MetroLabel10
+        'DeveloperName
         '
-        Me.MetroLabel10.AutoSize = True
-        Me.MetroLabel10.FontSize = MetroFramework.MetroLabelSize.Small
-        Me.MetroLabel10.Location = New System.Drawing.Point(3, 152)
-        Me.MetroLabel10.Name = "MetroLabel10"
-        Me.MetroLabel10.Size = New System.Drawing.Size(137, 15)
-        Me.MetroLabel10.TabIndex = 5
-        Me.MetroLabel10.Text = "gmbalaoro@outlook.com"
-        Me.MetroLabel10.WrapToLine = True
-        '
-        'MetroLabel9
-        '
-        Me.MetroLabel9.AutoSize = True
-        Me.MetroLabel9.FontSize = MetroFramework.MetroLabelSize.Tall
-        Me.MetroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel9.Location = New System.Drawing.Point(3, 127)
-        Me.MetroLabel9.Name = "MetroLabel9"
-        Me.MetroLabel9.Size = New System.Drawing.Size(130, 25)
-        Me.MetroLabel9.TabIndex = 4
-        Me.MetroLabel9.Text = "Gerard Balaoro"
-        Me.MetroLabel9.WrapToLine = True
+        Me.DeveloperName.AutoSize = True
+        Me.DeveloperName.FontSize = MetroFramework.MetroLabelSize.Tall
+        Me.DeveloperName.FontWeight = MetroFramework.MetroLabelWeight.Regular
+        Me.DeveloperName.Location = New System.Drawing.Point(3, 127)
+        Me.DeveloperName.Name = "DeveloperName"
+        Me.DeveloperName.Size = New System.Drawing.Size(130, 25)
+        Me.DeveloperName.TabIndex = 4
+        Me.DeveloperName.Text = "Gerard Balaoro"
+        Me.DeveloperName.WrapToLine = True
         '
         'MetroLabel8
         '
@@ -424,17 +396,17 @@ Partial Class MainForm
         Me.MetroLabel8.Text = "Developed by:"
         Me.MetroLabel8.WrapToLine = True
         '
-        'MetroLabel6
+        'Description
         '
-        Me.MetroLabel6.AutoSize = True
-        Me.MetroLabel6.Location = New System.Drawing.Point(3, 19)
-        Me.MetroLabel6.Name = "MetroLabel6"
-        Me.MetroLabel6.Size = New System.Drawing.Size(367, 57)
-        Me.MetroLabel6.TabIndex = 2
-        Me.MetroLabel6.Text = "Metro Tile Changer v1.0 is a tool designed to enable users to " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "customize start m" &
-    "enu tiles. This product only works on " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Windows 8, 8.1, and 10 and runs on .NET " &
-    "Framework 4.5.2"
-        Me.MetroLabel6.WrapToLine = True
+        Me.Description.AutoSize = True
+        Me.Description.Location = New System.Drawing.Point(3, 19)
+        Me.Description.Name = "Description"
+        Me.Description.Size = New System.Drawing.Size(345, 57)
+        Me.Description.TabIndex = 2
+        Me.Description.Text = "Metro Tile Changer is a tool designed to enable users to " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "customize start menu t" &
+    "iles. This product only works on " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Windows 8, 8.1, and 10 and runs on .NET Frame" &
+    "work 4.5.2"
+        Me.Description.WrapToLine = True
         '
         'TabPage_License
         '
@@ -472,7 +444,8 @@ Partial Class MainForm
         Me.Tab_Colors.Location = New System.Drawing.Point(431, 60)
         Me.Tab_Colors.Name = "Tab_Colors"
         Me.Tab_Colors.SelectedIndex = 0
-        Me.Tab_Colors.Size = New System.Drawing.Size(233, 342)
+        Me.Tab_Colors.Size = New System.Drawing.Size(232, 342)
+        Me.Tab_Colors.Style = MetroFramework.MetroColorStyle.Green
         Me.Tab_Colors.TabIndex = 4
         Me.Tab_Colors.UseSelectable = True
         '
@@ -484,7 +457,7 @@ Partial Class MainForm
         Me.TabPage_Color.HorizontalScrollbarSize = 10
         Me.TabPage_Color.Location = New System.Drawing.Point(4, 38)
         Me.TabPage_Color.Name = "TabPage_Color"
-        Me.TabPage_Color.Size = New System.Drawing.Size(225, 300)
+        Me.TabPage_Color.Size = New System.Drawing.Size(224, 300)
         Me.TabPage_Color.TabIndex = 0
         Me.TabPage_Color.Text = "Colors"
         Me.TabPage_Color.VerticalScrollbarBarColor = True
@@ -499,7 +472,7 @@ Partial Class MainForm
         Me.MainColorPanel.Location = New System.Drawing.Point(0, 0)
         Me.MainColorPanel.Name = "MainColorPanel"
         Me.MainColorPanel.Padding = New System.Windows.Forms.Padding(3)
-        Me.MainColorPanel.Size = New System.Drawing.Size(225, 300)
+        Me.MainColorPanel.Size = New System.Drawing.Size(224, 300)
         Me.MainColorPanel.TabIndex = 7
         '
         'TabPage_ColorOther
@@ -510,7 +483,7 @@ Partial Class MainForm
         Me.TabPage_ColorOther.HorizontalScrollbarSize = 10
         Me.TabPage_ColorOther.Location = New System.Drawing.Point(4, 38)
         Me.TabPage_ColorOther.Name = "TabPage_ColorOther"
-        Me.TabPage_ColorOther.Size = New System.Drawing.Size(225, 300)
+        Me.TabPage_ColorOther.Size = New System.Drawing.Size(224, 300)
         Me.TabPage_ColorOther.TabIndex = 1
         Me.TabPage_ColorOther.Text = "More Colors"
         Me.TabPage_ColorOther.VerticalScrollbarBarColor = True
@@ -525,7 +498,7 @@ Partial Class MainForm
         Me.OtherColorPanel.Location = New System.Drawing.Point(0, 0)
         Me.OtherColorPanel.Name = "OtherColorPanel"
         Me.OtherColorPanel.Padding = New System.Windows.Forms.Padding(3)
-        Me.OtherColorPanel.Size = New System.Drawing.Size(225, 300)
+        Me.OtherColorPanel.Size = New System.Drawing.Size(224, 300)
         Me.OtherColorPanel.TabIndex = 8
         '
         'TabPage_Accent
@@ -536,7 +509,7 @@ Partial Class MainForm
         Me.TabPage_Accent.HorizontalScrollbarSize = 10
         Me.TabPage_Accent.Location = New System.Drawing.Point(4, 38)
         Me.TabPage_Accent.Name = "TabPage_Accent"
-        Me.TabPage_Accent.Size = New System.Drawing.Size(225, 300)
+        Me.TabPage_Accent.Size = New System.Drawing.Size(224, 300)
         Me.TabPage_Accent.TabIndex = 2
         Me.TabPage_Accent.Text = "Accents"
         Me.TabPage_Accent.VerticalScrollbarBarColor = True
@@ -547,12 +520,24 @@ Partial Class MainForm
         '
         Me.AccentPanel.BackColor = System.Drawing.Color.Transparent
         Me.AccentPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.AccentPanel.Controls.Add(Me.AddColor)
         Me.AccentPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.AccentPanel.Location = New System.Drawing.Point(0, 0)
         Me.AccentPanel.Name = "AccentPanel"
         Me.AccentPanel.Padding = New System.Windows.Forms.Padding(3)
-        Me.AccentPanel.Size = New System.Drawing.Size(225, 300)
+        Me.AccentPanel.Size = New System.Drawing.Size(224, 300)
         Me.AccentPanel.TabIndex = 9
+        '
+        'AddColor
+        '
+        Me.AddColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.AddColor.Image = Global.MetroTileCustomizer.My.Resources.Resources.appbar_add
+        Me.AddColor.Location = New System.Drawing.Point(6, 6)
+        Me.AddColor.Name = "AddColor"
+        Me.AddColor.Size = New System.Drawing.Size(30, 30)
+        Me.AddColor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.AddColor.TabIndex = 3
+        Me.AddColor.TabStop = False
         '
         'ThemeManager
         '
@@ -570,15 +555,16 @@ Partial Class MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(684, 422)
+        Me.ClientSize = New System.Drawing.Size(683, 422)
         Me.Controls.Add(Me.Tab_Colors)
         Me.Controls.Add(Me.Tab_Main)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "MainForm"
         Me.Resizable = False
-        Me.Style = MetroFramework.MetroColorStyle.[Default]
-        Me.Text = "Metro Tile Customizer"
+        Me.Style = MetroFramework.MetroColorStyle.Green
+        Me.StyleManager = Me.ThemeManager
+        Me.Text = "MetroTileCustomizer"
         Me.TextAlign = MetroFramework.Forms.MetroFormTextAlign.Center
         Me.Tab_Main.ResumeLayout(False)
         Me.TabPage_Main.ResumeLayout(False)
@@ -593,6 +579,8 @@ Partial Class MainForm
         Me.TabPage_Color.ResumeLayout(False)
         Me.TabPage_ColorOther.ResumeLayout(False)
         Me.TabPage_Accent.ResumeLayout(False)
+        Me.AccentPanel.ResumeLayout(False)
+        CType(Me.AddColor, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ThemeManager, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -604,23 +592,19 @@ Partial Class MainForm
     Friend WithEvents MetroLabel5 As MetroFramework.Controls.MetroLabel
     Friend WithEvents opt_Text_Light As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents opt_Text_Dark As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents Button2_Restore As MetroFramework.Controls.MetroTextBox.MetroTextButton
-    Friend WithEvents Button1_Colorize As MetroFramework.Controls.MetroTextBox.MetroTextButton
     Friend WithEvents MetroLabel4 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel3 As MetroFramework.Controls.MetroLabel
     Friend WithEvents Switch_NameOnTile As MetroFramework.Controls.MetroToggle
     Friend WithEvents MetroLabel2 As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel1 As MetroFramework.Controls.MetroLabel
     Friend WithEvents ComboBox As MetroFramework.Controls.MetroComboBox
-    Friend WithEvents HiddenComboBox As MetroFramework.Controls.MetroComboBox
     Friend WithEvents TabPage_About As MetroFramework.Controls.MetroTabPage
-    Friend WithEvents MetroLabel12 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents Credits As MetroFramework.Controls.MetroLabel
     Friend WithEvents Logo As PictureBox
-    Friend WithEvents MetroLabel11 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents MetroLabel10 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents MetroLabel9 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents DeveloperLink As MetroFramework.Controls.MetroLabel
+    Friend WithEvents DeveloperName As MetroFramework.Controls.MetroLabel
     Friend WithEvents MetroLabel8 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents MetroLabel6 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents Description As MetroFramework.Controls.MetroLabel
     Friend WithEvents TabPage_License As MetroFramework.Controls.MetroTabPage
     Friend WithEvents MetroLabel7 As MetroFramework.Controls.MetroLabel
     Friend WithEvents Tab_Colors As MetroFramework.Controls.MetroTabControl
@@ -637,4 +621,7 @@ Partial Class MainForm
     Friend WithEvents OpenFileLocationToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenTargetFileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HexColor As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents Restore As MetroFramework.Controls.MetroButton
+    Friend WithEvents Colorize As MetroFramework.Controls.MetroButton
+    Friend WithEvents AddColor As PictureBox
 End Class

@@ -9,30 +9,32 @@ Imports System.Xml
 Public Class MainForm
 
 #Region "Declarations"
-    Dim ProgramDataItems = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu) & "\Programs", "*.lnk", SearchOption.AllDirectories)
-    Dim AppDataItems = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) & "\Programs", "*.lnk", SearchOption.AllDirectories)
-    Dim ItemPath As String
-    Dim ColorBox As New Panel
-    Dim AppData = My.Computer.FileSystem.SpecialDirectories.Temp & "\MetroTileChanger"
+    Private Lnk As LnkFile
 #End Region
 
 #Region "Event Handlers"
     Public Sub Startup(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Style = MetroColorStyle.Green
-        If Directory.Exists(AppData) = False Then
-            Directory.CreateDirectory(AppData)
-        End If
+        ComboBox.DataSource = Core.StartMenuItems
+        For Each Line As String In File.ReadLines(AppData("Colors_Main.txt"))
+            MakeColorBox(Line, MainColorPanel)
+        Next
+        For Each Line As String In File.ReadLines(AppData("Colors_Other.txt"))
+            MakeColorBox(Line, OtherColorPanel)
+        Next
+        For Each Line As String In File.ReadLines(AppData("Colors_Accent.txt"))
+            MakeColorBox(Line, AccentPanel)
+        Next
     End Sub
 
     Private Sub Shutdown(sender As Object, e As EventArgs) Handles MyBase.Closing
         Try
             Directory.Delete(AppData, True)
         Catch ex As Exception
-            Me.Close()
+            Close()
         End Try
     End Sub
 
-    Private Sub StartupCheck(sender As Object, e As EventArgs) Handles Me.Shown
+    Private Sub FormReady(sender As Object, e As EventArgs) Handles Me.Shown
         Dim identity = WindowsIdentity.GetCurrent()
         Dim principal = New WindowsPrincipal(identity)
         Dim isElevated As Boolean = principal.IsInRole(WindowsBuiltInRole.Administrator)
@@ -43,33 +45,36 @@ Public Class MainForm
     End Sub
 
     Public Sub SelectApplication(sender As Object, e As EventArgs) Handles ComboBox.SelectedIndexChanged
-        HiddenComboBox.SelectedIndex = ComboBox.SelectedIndex
-        LinkPath.Text = GetTargetPath(HiddenComboBox.Text)
-        ItemPath = Path.GetDirectoryName(HiddenComboBox.SelectedItem.ToString)
-        TilePreview.TileImage = ExtractAssociatedIcon(LinkPath.Text).ToBitmap()
+        Lnk = New LnkFile(ComboBox.SelectedValue)
+        LinkPath.Text = Lnk.Target
+        TilePreview.TileImage = Lnk.TargetIcon
         TilePreview.Text = ComboBox.Text
-        Try
-            Dim defaultconfig As String = LinkPath.Text.Replace(".exe", ".visualelementsmanifest.xml")
-            If IO.File.Exists(defaultconfig) Then
-                ReadConfiguration(defaultconfig)
-            Else
-                TilePreview.Text = ComboBox.Text
-                TilePreview.BackColor = Color.MediumSeaGreen
-                TilePreview.ForeColor = Color.White
-                HexColor.Text = ""
-                Switch_NameOnTile.Checked = True
-                opt_Text_Light.Checked = True
-            End If
-        Catch ex As Exception
-        End Try
+        Dim Config As String = Lnk.VisualManifest
+        If IO.File.Exists(Config) Then
+            Dim Tile As New MetroTile(Config)
+            HexColor.Text = If(Tile.BackgroundColor <> Nothing, ColorTranslator.ToHtml(Tile.BackgroundColor), Nothing)
+            TilePreview.BackColor = If(Tile.BackgroundColor <> Nothing, Tile.BackgroundColor, MetroColors.Green)
+            TilePreview.ForeColor = If(Tile.ForegroundText = 0, Color.White, Color.Black)
+            TilePreview.Text = Lnk.Name
+            Switch_NameOnTile.Checked = Tile.ShowNameOnSquare
+            opt_Text_Light.Checked = If(Tile.ForegroundText = 0, True, False)
+            opt_Text_Dark.Checked = If(Tile.ForegroundText = 1, True, False)
+        Else
+            TilePreview.Text = ComboBox.Text
+            TilePreview.BackColor = MetroColors.Green
+            TilePreview.ForeColor = Color.White
+            HexColor.Text = ""
+            Switch_NameOnTile.Checked = True
+            opt_Text_Light.Checked = True
+        End If
     End Sub
 
-    Public Sub ApplyButtonClick(sender As Object, e As EventArgs) Handles Button1_Colorize.Click
+    Public Sub ApplyButtonClick(sender As Object, e As EventArgs) Handles Colorize.Click
         If CheckData() = True Then
             ApplyChanges()
-            RefreshStartMenu()
+            Lnk.Refresh()
             MetroMessageBox.Show(Me, "Tile Customized! It may take a few seconds For the changes To be visible.", "Action Completed Succefully", MessageBoxButtons.OK, MessageBoxIcon.Question, 150)
-        ElseIf LinkPath.Text = Nothing
+        ElseIf LinkPath.Text = Nothing Then
             MetroMessageBox.Show(Me, "Please Select an item.", "Unable To Complete Action", MessageBoxButtons.OK, MessageBoxIcon.Error, 150)
         End If
     End Sub
@@ -90,11 +95,10 @@ Public Class MainForm
         TilePreview.ForeColor = Color.White
     End Sub
 
-    Private Sub RestoreButtonClick(sender As Object, e As EventArgs) Handles Button2_Restore.Click
+    Private Sub RestoreButtonClick(sender As Object, e As EventArgs) Handles Restore.Click
         If CheckData() = True Then
-            Dim defaultconfig As String = LinkPath.Text.Replace(".exe", ".visualelementsmanifest.xml")
-            File.Delete(defaultconfig)
-            RefreshStartMenu()
+            File.Delete(Lnk.VisualManifest)
+            Lnk.Refresh()
             Me.Refresh()
             MetroMessageBox.Show(Me, "Tile Restored! It may take a few seconds For the changes To be visible.", "Action Completed Succefully", MessageBoxButtons.OK, MessageBoxIcon.Question, 150)
         Else
@@ -102,7 +106,7 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub Shutdown(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Shutdown(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing, MyBase.Closing
         If Directory.Exists(AppData) Then
             Directory.Delete(AppData, True)
         End If
@@ -118,7 +122,7 @@ Public Class MainForm
 
     Private Sub OpenFileLocationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFileLocationToolStripMenuItem.Click
         If ComboBox.Text <> Nothing Then
-            Dim folder = Path.GetDirectoryName(HiddenComboBox.Text)
+            Dim folder = Path.GetDirectoryName(ComboBox.SelectedValue)
             Process.Start(folder)
 
         Else
@@ -134,9 +138,24 @@ Public Class MainForm
         End If
     End Sub
 
+    Private Sub OpenColorDialog(sender As Object, e As EventArgs) Handles AddColor.Click
+        Try
+            ColorDialog.Color = ColorTranslator.FromHtml(HexColor.Text)
+        Catch ex As Exception
+        End Try
+        If ColorDialog.ShowDialog = DialogResult.OK Then
+            TilePreview.BackColor = ColorDialog.Color
+            HexColor.Text = ColorTranslator.ToHtml(ColorDialog.Color)
+        End If
+    End Sub
+
+    Public Sub ChangeColor(ByVal sender As Object, ByVal e As EventArgs)
+        Dim ColorBox As Panel = CType(sender, Panel)
+        HexColor.Text = ColorTranslator.ToHtml(ColorBox.BackColor)
+    End Sub
 #End Region
 
-#Region "Sub Methods"
+#Region "Methods"
     Public Sub ReadConfiguration(ByVal defaultconfig)
         Try
             Using reader As XmlReader = XmlReader.Create(defaultconfig)
@@ -186,27 +205,6 @@ Public Class MainForm
         End Try
     End Sub
 
-    Function GetTargetPath(ByVal lnkpath As String)
-        Dim guid As System.Guid = New System.Guid("13709620-C279-11CE-A49E-444553540000")
-        Dim shl As Shell = DirectCast(Activator.CreateInstance(Type.GetTypeFromCLSID(guid)), Shell)
-        lnkpath = Path.GetFullPath(lnkpath)
-        Dim dir As Folder = shl.[NameSpace](Path.GetDirectoryName(lnkpath))
-        Dim itm As FolderItem = dir.Items().Item(Path.GetFileName(lnkpath))
-        Dim filename = (DirectCast(itm.GetLink, ShellLinkObject)).Target.Name
-        Dim folder = (DirectCast(itm.GetLink, ShellLinkObject)).WorkingDirectory
-        Dim filepath = (DirectCast(itm.GetLink, ShellLinkObject)).Target.Path
-        Dim workaround = filepath.Replace("Program Files (x86)", "Program Files")
-        If File.Exists(folder & "\" & filename) = True Then
-            Return folder & "\" & filename
-        ElseIf File.Exists(filepath) = True
-            Return filepath
-        ElseIf File.Exists(workaround)
-            Return workaround
-        Else
-            Return Nothing
-        End If
-    End Function
-
     Public Sub ApplyChanges()
         Dim saveloc As String = LinkPath.Text.Replace(".exe", ".visualelementsmanifest.xml")
         Dim i As Integer
@@ -234,38 +232,11 @@ Public Class MainForm
             objWriter.WriteLine(aryText(i))
         Next
         objWriter.Close()
-        RefreshStartMenu()
-    End Sub
-
-    Private Sub RefreshStartMenu()
-        Dim CMDThread As New Threading.Thread(AddressOf CMD_RefreshStart)
-        CMDThread.Start()
-    End Sub
-
-    Private Sub CMD_RefreshStart()
-        Dim myprocess As New Process
-        Dim StartInfo As New System.Diagnostics.ProcessStartInfo
-        StartInfo.FileName = "cmd.exe"
-        StartInfo.RedirectStandardInput = True
-        StartInfo.UseShellExecute = False
-        StartInfo.CreateNoWindow = True
-        myprocess.StartInfo = StartInfo
-        myprocess.Start()
-        Dim SW As System.IO.StreamWriter = myprocess.StandardInput
-        SW.WriteLine("cd " & ItemPath)
-        SW.WriteLine("For %f In (*.lnk) Do copy /b ""%f"" +,,")
-        SW.WriteLine("exit")
-        SW.Close()
     End Sub
 
     Function CheckData() As Boolean
-        Dim Pre1, Pre2, Pre3 As Boolean
-        If ComboBox.Text <> Nothing Or ComboBox.SelectedItem <> Nothing Then
-            Pre1 = True
-        Else
-            Pre1 = False
-        End If
-        If HiddenComboBox.SelectedItem <> Nothing AndAlso File.Exists(HiddenComboBox.Text) Then
+        Dim Pre2, Pre3 As Boolean
+        If ComboBox.SelectedValue <> Nothing AndAlso File.Exists(ComboBox.SelectedValue) Then
             Pre2 = True
         Else
             Pre2 = False
@@ -275,12 +246,21 @@ Public Class MainForm
         Else
             Pre3 = False
         End If
-        If Pre1 = True And Pre2 = True And Pre3 = True Then
+        If Pre2 = True And Pre3 = True Then
             Return True
         Else
             Return False
         End If
     End Function
+
+    Public Sub MakeColorBox(ByVal line As String, ByVal Parent As FlowLayoutPanel)
+        Dim ColorBox As New Panel
+        ColorBox.BackColor = ColorTranslator.FromHtml(line)
+        ColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        ColorBox.Size = New Size(30, 30)
+        AddHandler ColorBox.Click, AddressOf ChangeColor
+        Parent.Controls.Add(ColorBox)
+    End Sub
 #End Region
 
 End Class
