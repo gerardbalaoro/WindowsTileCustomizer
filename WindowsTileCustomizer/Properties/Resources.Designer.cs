@@ -183,6 +183,26 @@ namespace WindowsTileCustomizer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ionicons_eyedrop {
+            get {
+                object obj = ResourceManager.GetObject("ionicons_eyedrop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ionicons_palette {
+            get {
+                object obj = ResourceManager.GetObject("ionicons_palette", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap octicons_globe {
             get {
                 object obj = ResourceManager.GetObject("octicons_globe", resourceCulture);

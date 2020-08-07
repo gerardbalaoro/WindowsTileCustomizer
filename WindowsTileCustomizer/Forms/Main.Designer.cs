@@ -35,6 +35,7 @@ namespace WindowsTileCustomizer.Forms
             this.MenuItemDropdownLabel = new MetroFramework.Controls.MetroLabel();
             this.MainTabControl = new MetroFramework.Controls.MetroTabControl();
             this.CustomizeTabPage = new MetroFramework.Controls.MetroTabPage();
+            this.SuggestColorButton = new MetroFramework.Controls.MetroButton();
             this.PickColorButton = new MetroFramework.Controls.MetroButton();
             this.ForegroundDropdown = new MetroFramework.Controls.MetroComboBox();
             this.BackgroundLabel = new MetroFramework.Controls.MetroLabel();
@@ -73,6 +74,7 @@ namespace WindowsTileCustomizer.Forms
             this.ManifestTextBox = new MetroFramework.Controls.MetroTextBox();
             this.OpenImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.PickColorDialog = new System.Windows.Forms.ColorDialog();
+            this.MainToolTip = new MetroFramework.Components.MetroToolTip();
             this.MainTabControl.SuspendLayout();
             this.CustomizeTabPage.SuspendLayout();
             this.AboutTabPage.SuspendLayout();
@@ -108,6 +110,7 @@ namespace WindowsTileCustomizer.Forms
             // 
             // CustomizeTabPage
             // 
+            this.CustomizeTabPage.Controls.Add(this.SuggestColorButton);
             this.CustomizeTabPage.Controls.Add(this.PickColorButton);
             this.CustomizeTabPage.Controls.Add(this.ForegroundDropdown);
             this.CustomizeTabPage.Controls.Add(this.BackgroundLabel);
@@ -141,14 +144,27 @@ namespace WindowsTileCustomizer.Forms
             this.CustomizeTabPage.VerticalScrollbarHighlightOnWheel = false;
             this.CustomizeTabPage.VerticalScrollbarSize = 10;
             // 
+            // SuggestColorButton
+            // 
+            this.SuggestColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SuggestColorButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SuggestColorButton.BackgroundImage")));
+            this.SuggestColorButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SuggestColorButton.Location = new System.Drawing.Point(280, 261);
+            this.SuggestColorButton.Name = "SuggestColorButton";
+            this.SuggestColorButton.Size = new System.Drawing.Size(23, 23);
+            this.SuggestColorButton.TabIndex = 31;
+            this.SuggestColorButton.UseSelectable = true;
+            this.SuggestColorButton.Click += new System.EventHandler(this.SuggestColorButton_Click);
+            // 
             // PickColorButton
             // 
             this.PickColorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PickColorButton.Location = new System.Drawing.Point(275, 261);
+            this.PickColorButton.BackgroundImage = global::WindowsTileCustomizer.Properties.Resources.ionicons_palette;
+            this.PickColorButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PickColorButton.Location = new System.Drawing.Point(251, 261);
             this.PickColorButton.Name = "PickColorButton";
-            this.PickColorButton.Size = new System.Drawing.Size(58, 23);
+            this.PickColorButton.Size = new System.Drawing.Size(23, 23);
             this.PickColorButton.TabIndex = 30;
-            this.PickColorButton.Text = "Pick";
             this.PickColorButton.UseSelectable = true;
             this.PickColorButton.Click += new System.EventHandler(this.PickColorButton_Click);
             // 
@@ -162,9 +178,9 @@ namespace WindowsTileCustomizer.Forms
             this.ForegroundDropdown.FormattingEnabled = true;
             this.ForegroundDropdown.IntegralHeight = false;
             this.ForegroundDropdown.ItemHeight = 19;
-            this.ForegroundDropdown.Location = new System.Drawing.Point(380, 261);
+            this.ForegroundDropdown.Location = new System.Drawing.Point(370, 261);
             this.ForegroundDropdown.Name = "ForegroundDropdown";
-            this.ForegroundDropdown.Size = new System.Drawing.Size(125, 25);
+            this.ForegroundDropdown.Size = new System.Drawing.Size(135, 25);
             this.ForegroundDropdown.TabIndex = 29;
             this.ForegroundDropdown.UseSelectable = true;
             this.ForegroundDropdown.ValueMember = "Value";
@@ -298,7 +314,7 @@ namespace WindowsTileCustomizer.Forms
             // 
             // 
             this.BackgroundTextBox.CustomButton.Image = null;
-            this.BackgroundTextBox.CustomButton.Location = new System.Drawing.Point(80, 1);
+            this.BackgroundTextBox.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.BackgroundTextBox.CustomButton.Name = "";
             this.BackgroundTextBox.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.BackgroundTextBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -317,7 +333,7 @@ namespace WindowsTileCustomizer.Forms
             this.BackgroundTextBox.SelectionLength = 0;
             this.BackgroundTextBox.SelectionStart = 0;
             this.BackgroundTextBox.ShortcutsEnabled = true;
-            this.BackgroundTextBox.Size = new System.Drawing.Size(102, 23);
+            this.BackgroundTextBox.Size = new System.Drawing.Size(78, 23);
             this.BackgroundTextBox.TabIndex = 16;
             this.BackgroundTextBox.UseSelectable = true;
             this.BackgroundTextBox.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -337,7 +353,7 @@ namespace WindowsTileCustomizer.Forms
             // 
             this.ForegroundLabel.AutoSize = true;
             this.ForegroundLabel.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.ForegroundLabel.Location = new System.Drawing.Point(380, 243);
+            this.ForegroundLabel.Location = new System.Drawing.Point(370, 243);
             this.ForegroundLabel.Name = "ForegroundLabel";
             this.ForegroundLabel.Size = new System.Drawing.Size(89, 15);
             this.ForegroundLabel.TabIndex = 15;
@@ -487,7 +503,6 @@ namespace WindowsTileCustomizer.Forms
             // VersionIconPictureBox
             // 
             this.VersionIconPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.VersionIconPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.octicons_tag;
             this.VersionIconPictureBox.Location = new System.Drawing.Point(14, 274);
             this.VersionIconPictureBox.Name = "VersionIconPictureBox";
             this.VersionIconPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -509,7 +524,6 @@ namespace WindowsTileCustomizer.Forms
             // LicenseIconPictureBox
             // 
             this.LicenseIconPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.LicenseIconPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.octicons_law;
             this.LicenseIconPictureBox.Location = new System.Drawing.Point(14, 330);
             this.LicenseIconPictureBox.Name = "LicenseIconPictureBox";
             this.LicenseIconPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -531,7 +545,6 @@ namespace WindowsTileCustomizer.Forms
             // WebsiteIconPictureBox
             // 
             this.WebsiteIconPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.WebsiteIconPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.octicons_globe;
             this.WebsiteIconPictureBox.Location = new System.Drawing.Point(14, 302);
             this.WebsiteIconPictureBox.Name = "WebsiteIconPictureBox";
             this.WebsiteIconPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -542,7 +555,6 @@ namespace WindowsTileCustomizer.Forms
             // LogoPictureBox
             // 
             this.LogoPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.LogoPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.Icon;
             this.LogoPictureBox.Location = new System.Drawing.Point(14, 25);
             this.LogoPictureBox.Name = "LogoPictureBox";
             this.LogoPictureBox.Size = new System.Drawing.Size(139, 130);
@@ -654,6 +666,18 @@ namespace WindowsTileCustomizer.Forms
             // 
             this.OpenImageDialog.Filter = "Images|*.png;*.jpg;*.jpeg;*.bmp";
             // 
+            // PickColorDialog
+            // 
+            this.PickColorDialog.AnyColor = true;
+            this.PickColorDialog.FullOpen = true;
+            this.PickColorDialog.SolidColorOnly = true;
+            // 
+            // MainToolTip
+            // 
+            this.MainToolTip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.MainToolTip.StyleManager = null;
+            this.MainToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,5 +750,7 @@ namespace WindowsTileCustomizer.Forms
         private PictureBox VersionIconPictureBox;
         private MetroFramework.Controls.MetroLabel AuthorLabel;
         private MetroFramework.Controls.MetroLabel DevelopedByLabel;
+        private MetroFramework.Controls.MetroButton SuggestColorButton;
+        private MetroFramework.Components.MetroToolTip MainToolTip;
     }
 }

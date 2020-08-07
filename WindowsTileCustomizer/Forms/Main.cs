@@ -1,4 +1,5 @@
 ﻿using MetroFramework;
+using MetroFramework.Components;
 using MetroFramework.Controls;
 using MetroFramework.Drawing;
 using System;
@@ -156,6 +157,12 @@ namespace WindowsTileCustomizer.Forms
             ManifestTextBox.Text = CurrentVisualElements.ToString();
         }
 
+        private void SetDynamicTooltip(Control control, string caption)
+        {
+            MetroToolTip toolTip = new MetroToolTip();
+            toolTip.SetToolTip(control, caption);
+        }
+
         private void BrowseTileLogo(ref MetroTextBox textBox)
         {
             OpenImageDialog.InitialDirectory = CurrentMenuItem.TargetDirectory;
@@ -167,6 +174,9 @@ namespace WindowsTileCustomizer.Forms
 
         private void Main_Load(object sender, EventArgs e)
         {
+            MainToolTip.SetToolTip(PickColorButton, "Color Picker");
+            MainToolTip.SetToolTip(SuggestColorButton, "Get Dominant Color");
+
             MediumLogoBrowseButton.Click += new EventHandler((s, args) => {
                 BrowseTileLogo(ref MediumLogoTextBox);
             });
@@ -253,8 +263,18 @@ namespace WindowsTileCustomizer.Forms
 
         private void PickColorButton_Click(object sender, EventArgs e)
         {
+            PickColorDialog.Color = MediumTilePreview.BackColor;
             if (PickColorDialog.ShowDialog() == DialogResult.OK) {
                 BackgroundTextBox.Text = ColorTranslator.ToHtml(PickColorDialog.Color);
+            }
+        }
+
+        private void SuggestColorButton_Click(object sender, EventArgs e)
+        {
+            if (MediumTilePreview.TileImage != null) {
+                ColorThiefDotNet.ColorThief colorThief = new ColorThiefDotNet.ColorThief();
+                var quantizedColor = colorThief.GetColor((Bitmap)MediumTilePreview.TileImage);
+                BackgroundTextBox.Text = quantizedColor.Color.ToHexString();
             }
         }
     }

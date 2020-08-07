@@ -139,6 +139,12 @@
   <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ionicons_eyedrop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\ionicons_eyedrop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ionicons_palette" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ionicons_palette.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="octicons_globe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\octicons_globe.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
