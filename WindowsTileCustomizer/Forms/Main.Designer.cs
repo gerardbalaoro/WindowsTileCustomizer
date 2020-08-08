@@ -503,6 +503,7 @@ namespace WindowsTileCustomizer.Forms
             // VersionIconPictureBox
             // 
             this.VersionIconPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.VersionIconPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.octicons_tag;
             this.VersionIconPictureBox.Location = new System.Drawing.Point(14, 274);
             this.VersionIconPictureBox.Name = "VersionIconPictureBox";
             this.VersionIconPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -545,6 +546,7 @@ namespace WindowsTileCustomizer.Forms
             // WebsiteIconPictureBox
             // 
             this.WebsiteIconPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.WebsiteIconPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.octicons_globe;
             this.WebsiteIconPictureBox.Location = new System.Drawing.Point(14, 302);
             this.WebsiteIconPictureBox.Name = "WebsiteIconPictureBox";
             this.WebsiteIconPictureBox.Size = new System.Drawing.Size(20, 20);
@@ -555,6 +557,7 @@ namespace WindowsTileCustomizer.Forms
             // LogoPictureBox
             // 
             this.LogoPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.LogoPictureBox.Image = global::WindowsTileCustomizer.Properties.Resources.Icon;
             this.LogoPictureBox.Location = new System.Drawing.Point(14, 25);
             this.LogoPictureBox.Name = "LogoPictureBox";
             this.LogoPictureBox.Size = new System.Drawing.Size(139, 130);

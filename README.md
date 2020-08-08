@@ -2,7 +2,7 @@
 
 Start menu tile customization tool for Windows 10 desktop applications
 
-![Screenshot](https://i.snipboard.io/g3OrPb.jpg)
+![Screenshot](https://i.snipboard.io/FGciLb.jpg)
 
 ## How it works
 
