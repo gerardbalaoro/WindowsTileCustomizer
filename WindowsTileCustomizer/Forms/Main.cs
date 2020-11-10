@@ -31,7 +31,7 @@ namespace WindowsTileCustomizer.Forms
 
         private void LoadStartMenuItems()
         {
-            StartMenuItems = StartMenu.GetAllItems().ToArray().OrderBy(i => i.Name).ToArray();
+            StartMenuItems = StartMenu.GetAllItems().OrderBy(i => i.Name).ToArray();
             StartMenuDropdown.DataSource = StartMenuItems;
         }
 
