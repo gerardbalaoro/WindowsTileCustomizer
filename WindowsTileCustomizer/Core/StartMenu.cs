@@ -18,30 +18,39 @@ namespace WindowsTileCustomizer.Core
             this._Path = Path;
         }
 
-        public string Path {
+        public string Path
+        {
             get { return this._Path; }
         }
 
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 return System.IO.Path.GetFileNameWithoutExtension(Path);
             }
         }
 
-        public string Target {
-            get {
+        public string Target
+        {
+            get
+            {
                 Shell WShell = new Shell();
                 Folder ShortcutFolder = WShell.NameSpace(System.IO.Path.GetDirectoryName(Path));
                 FolderItem Shortcut = ShortcutFolder.ParseName(System.IO.Path.GetFileName(Path));
-                try {
-                    if (Shortcut != null && Shortcut.IsLink) {
+                try
+                {
+                    if (Shortcut != null && Shortcut.IsLink)
+                    {
                         ShellLinkObject ShortcutLink = (ShellLinkObject)Shortcut.GetLink;
                         string ShortcutLinkPath = ShortcutLink.Path;
                         if (string.IsNullOrEmpty(ShortcutLinkPath)) return null;
                         if (!File.Exists(ShortcutLinkPath)) return ShortcutLinkPath.Replace("\\Program Files (x86)\\", "\\Program Files\\");
                         return File.Exists(ShortcutLinkPath) ? ShortcutLinkPath : null;
                     }
-                } catch (UnauthorizedAccessException e) {
+                }
+                catch (UnauthorizedAccessException e)
+                {
                     System.Diagnostics.Debug.WriteLine($"{e.Message}: {Name}");
                 }
 
@@ -49,24 +58,33 @@ namespace WindowsTileCustomizer.Core
             }
         }
 
-        public string TargetDirectory {
-            get {
+        public string TargetDirectory
+        {
+            get
+            {
                 return Target != null ? System.IO.Path.GetDirectoryName(Target) : null;
             }
         }
 
-        public Bitmap Icon {
-            get {
-                try {
+        public Bitmap Icon
+        {
+            get
+            {
+                try
+                {
                     return Target != null ? System.Drawing.Icon.ExtractAssociatedIcon(Target).ToBitmap() : null;
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     return null;
                 }
             }
         }
 
-        public string ManifestPath {
-            get {
+        public string ManifestPath
+        {
+            get
+            {
                 if (string.IsNullOrEmpty(Target)) return null;
                 return System.IO.Path.Combine(
                     System.IO.Path.GetDirectoryName(Target),
@@ -86,14 +104,41 @@ namespace WindowsTileCustomizer.Core
             Environment.GetFolderPath(Environment.SpecialFolder.CommonStartMenu)
         };
 
-        public static IEnumerable<StartMenu> GetAllItems()
+        public static ICollection<StartMenu> GetAllItems()
         {
-            foreach (var path in Paths) {
-                foreach (var shortcut in Directory.GetFiles(path, "*.lnk", SearchOption.AllDirectories)) {
-                    StartMenu menuItem = new StartMenu(shortcut);
-                    if (!string.IsNullOrEmpty(menuItem.Target)) {
-                        yield return menuItem;
+            var result = new List<StartMenu>();
+            foreach (var path in Paths)
+            {
+                ReadAllItems(path, result);
+            }
+            return result;
+        }
+
+        public static void ReadAllItems(string path, ICollection<StartMenu> items)
+        {
+            // in order to skip directories which throw exception, perform recursively starting with directories and then files
+            foreach (var directory in Directory.EnumerateDirectories(path))
+            {
+                try
+                {
+                    ReadAllItems(directory, items);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                }
+            }
+            foreach (var shortcut in Directory.EnumerateFiles(path, "*.lnk", SearchOption.TopDirectoryOnly))
+            {
+                try
+                {
+                    var menuItem = new StartMenu(shortcut);
+                    if (!string.IsNullOrEmpty(menuItem.Target))
+                    {
+                        items.Add(menuItem);
                     }
+                }
+                catch (UnauthorizedAccessException)
+                {
                 }
             }
         }
